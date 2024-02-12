@@ -1,48 +1,29 @@
 import styled from "styled-components";
 
-interface FormContainerProps{
-    width:string;
-    height:string
-}
-
-export const FormContainer=styled.div<FormContainerProps>`
+export const Container = styled.div`
+    padding:8px;
+    background-color:${({ theme }) => theme.colors['base-button']};
+    border-radius: 6px;
     display: flex;
-    flex-direction: row;
-    width: ${(props)=> props.width};
-    height: ${(props)=> props.height};
-    padding: 8px;
-    justify-content: center;
-    align-items: center;
-    gap: 5px;
+    gap: 4px;
 
-    border-radius: 6px;
-    background: #E6E5E5;
-`
+    button{
+        background-color:transparent;
+        display: flex;
+        align-items: center;
+    }
 
-export const FormButton = styled.div`
-    margin-left: 10px;
-    /* display: flex;
-    padding: 8px;
-    justify-content: center;
-    align-items: center;
-    gap: 8px;
+    button svg{
+        color:${({ theme }) => theme.colors.purple};
+        transition:all 0.2s;
 
-    border-radius: 6px;
-    background-color: #4B2995;
+        &:hover{
+            color:${({ theme }) => theme.colors['purple-dark']};
+        }
+    }
 
-    width: auto;
-    border: none;
-    cursor: pointer; */
-`
-export const PlusControl = styled.button`
-    width: auto;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
-`
-export const MinusControl = styled.button`
-    width: auto;
-    border: none;
-    background-color: transparent;
-    cursor: pointer;
+    span{
+        padding-top:2px;
+        color:${({ theme }) => theme.colors['base-title']};
+    }
 `

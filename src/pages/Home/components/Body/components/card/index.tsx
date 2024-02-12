@@ -1,51 +1,98 @@
-import { CardBody, CardContent, CardFooter, CardImage, CardTag, CardText, CoffeePrice, TagSection } from "./styles";
-import TraditionalCoffee from '../../../../../../../public/img/coffees/coffee_1.png'
-import { CardForm } from "./form";
+import { CoffeeImg, Container, Control, Description, Order, Price, Tags, Title } from "./styles";
+import {  QuantityInput } from "./form";
+import { ShoppingCart } from "phosphor-react";
+import {useEffect, useState } from "react";
+import { useCart } from "../../../../../../hooks/useCart";
+import { useTheme } from "styled-components";
+import { CheckFat } from "@phosphor-icons/react";
 
-interface CardTags{
-    color:string,
-    description:string
+type Props = {
+    coffee:{
+        id:string,
+        title:string,
+        description:string,
+        tags:string[],
+        price:number,
+        image:string
+    }
 }
 
-interface CardProps{
-    url:string,
-    title:string,
-    tags:CardTags[]
-    subtitle:string,
-    description:string
-    price:string
-}
 
-export function Card({
-    url,
-    title,
-    tags,
-    subtitle,
-    description,
-    price
-}:CardProps){
+export function Card({coffee}:Props){
+    const [ quantity, setQuantity] = useState(1);
+    const [isItemAdded, setIsItemAdded] = useState(false);
+    const theme = useTheme();
+    const { addItem } = useCart();
+
+    function incrementQuantity() {
+        setQuantity((state) => state + 1)
+      }
+    
+      function decrementItemQuantity() {
+        if (quantity > 1) {
+          setQuantity((state) => state - 1)
+        }
+      }
+
+    function handleAddItem(){
+        addItem({id:coffee.id,quantity});
+        setIsItemAdded(true);
+        setQuantity(1);
+    }
+
+    useEffect(()=>{
+        let timeout:number;
+        if(isItemAdded){
+            timeout = setTimeout(()=>{
+                setIsItemAdded(false)
+            },1000)
+        }
+
+        return ()=>{
+            if(timeout){
+                clearTimeout(timeout)
+            }
+        }
+    },[isItemAdded])
+
+
     return(
-        <CardContent>
-            <CardImage><img src={url}/></CardImage>
-            <CardBody>
-                <TagSection>
-                    {
-                        tags.map((tag) =>{
-                            return(
-                                <CardTag><p>{tag.description}</p></CardTag>
-                            )
-                        })
-                    }
-                </TagSection>
-                <CardText>
-                    <h1>{subtitle}</h1>
-                    <p>{description}</p>
-                </CardText>
-            </CardBody>
-            <CardFooter>
-                    <CoffeePrice><span>R$</span>{price}</CoffeePrice>
-            <CardForm/>
-            </CardFooter>
-        </CardContent>
+        <Container>
+                <CoffeeImg src={coffee.image} alt={coffee.title}/>
+                <Tags>
+                    {coffee.tags.map((tag)=>(
+                        <span key={tag}>{tag}</span>
+                    ))}
+                </Tags>
+
+                <Title>{coffee.title}</Title>
+                <Description>{coffee.description}</Description>
+                <Control>
+                     <Price>
+                        <span>R$</span>
+                        <span>{coffee.price.toFixed(2)}</span>
+                    </Price>
+
+                     <Order $itemAdded={isItemAdded}>
+                        <QuantityInput
+                            quantity={quantity}
+                            incrementQuantity={incrementQuantity}
+                            decrementQuantity={decrementItemQuantity}
+                        />
+
+                    <button disabled={isItemAdded} onClick={handleAddItem}>
+                        {isItemAdded ?(
+                            <CheckFat
+                            weight="fill"
+                            size={22}
+                            color={theme.colors['base-card']}
+                            />
+                        ):(
+                            <ShoppingCart size={22} color={theme.colors['base-card']} />
+                            )}
+                    </button>
+                    </Order>
+                </Control>
+        </Container>
     )
 }

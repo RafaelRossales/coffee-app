@@ -1,4 +1,5 @@
 import { createGlobalStyle } from "styled-components";
+import { mixins } from "./mixins";
 
 export const GlobalStyle = createGlobalStyle`
  * {
@@ -7,21 +8,18 @@ export const GlobalStyle = createGlobalStyle`
     box-sizing: border-box;
   }
 
-  :focus {
-    outline: none;
-    box-shadow: 0 0 0 2px 'yelllow';
-  }
-
   body {
-    background-color: 'red';
-    color:'orange';
+    background: ${(props) => props.theme.colors.background};
+    color: ${(props) => props.theme.colors['base-text']};
     -webkit-font-smoothing: antialiased;
   }
 
   body, input, textarea, button {
-    font-family: 'Roboto', sans-serif;
-    font-weight: 400;
-    font-size: 1rem;
-    overflow-x: hidden;
+    ${mixins.fonts.textM};
+  }
+
+  button {
+    border: none;
+    cursor: pointer;
   }
 `
