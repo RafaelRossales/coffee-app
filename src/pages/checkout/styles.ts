@@ -25,10 +25,10 @@ export const InfoContainer = styled.div`
         gap:32px;
     }
 `
-export const FormsConatiner = styled.div`
+export const FormsContainer = styled.div`
     padding: 40px;
     border-radius: 6px;
-    background-color: ${({ theme }) => theme.colors['base-subtitle']};
+    background-color: ${({ theme }) => theme.colors['base-card']};
     width:100%;
     min-width: 640px;
 
@@ -36,7 +36,7 @@ export const FormsConatiner = styled.div`
     flex-direction: column;
     gap:32px;
     `
-export const AddressContainer = styled(FormsConatiner)``
+export const AddressContainer = styled(FormsContainer)``
 
 export const Heading = styled.div`
         display: flex;
@@ -52,7 +52,7 @@ export const Heading = styled.div`
             }
         }
     `
-export const PaymentContainer = styled(FormsConatiner)``
+export const PaymentContainer = styled(FormsContainer)``
 
 export const PaymentHeading = styled(Heading)`
         svg{
@@ -99,6 +99,35 @@ export const Coffee =  styled.div`
         }
     `
 
+export const CoffeeInfo = styled.div`
+  display: flex;
+  gap: 8px;
+
+  > button {
+    padding: 6px 8px;
+    background-color: ${({ theme }) => theme.colors['base-button']};
+    border-radius: 6px;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+
+    transition: all 0.2s;
+
+    &:hover {
+      background-color: ${({ theme }) => theme.colors['base-hover']};
+    }
+
+    > svg {
+      color: ${({ theme }) => theme.colors.purple};
+    }
+
+    > span {
+      ${mixins.fonts.buttonM};
+      text-transform: uppercase;
+      color: ${({ theme }) => theme.colors['base-text']};
+    }
+  }
+`
 export const CartTotal = styled.div`
         padding:40px;
         border-radius: 6px 36px;
@@ -114,7 +143,7 @@ export const CartTotal = styled.div`
         }
     `
 
-export const CardTotalInfo = styled.div`
+export const CartTotalInfo = styled.div`
         display: flex;
         flex-direction: column;
         gap:12px;
@@ -160,7 +189,7 @@ export const CheckoutButton = styled.button`
     border-radius: 6px;
 `
 
-export const PaymentrErroMessage = styled.p`
+export const PaymentErrorMessage = styled.p`
     ${mixins.fonts.textXS};
     font-weight: 400;
     color:red;
