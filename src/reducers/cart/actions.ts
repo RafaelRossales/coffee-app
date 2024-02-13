@@ -53,11 +53,11 @@ export function incrementItemQuantityAction(itemId:IItem['id']){
      } satisfies Actions
 }
 
-export function decrementItemQuantity(actionTypes:ActionTypes){
+export function decrementItemQuantityAction(itemId:IItem['id']){
     return{
         type:ActionTypes.DECREMENT_ITEM_QUANTITY,
         payload:{
-            item,
+            itemId,
         },
     } satisfies Actions
 }

@@ -1,5 +1,5 @@
 import { Link } from "react-router-dom";
-import Logo from './logo.png';
+import Logo from '../../../../../public/img/Logo.svg';
 import { Aside, Container } from "./style";
 import { MapPin } from "@phosphor-icons/react";
 import { useCart } from "../../../../hooks/useCart";
@@ -8,7 +8,6 @@ import { ShoppingCart } from "phosphor-react";
 export function Header(){
 
     const { cart } = useCart();
-
     return(
         <Container>
             <Link to="/">

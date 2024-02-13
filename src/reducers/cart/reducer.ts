@@ -1,18 +1,9 @@
 import { produce } from "immer";
 import { Actions } from "./actions";
 import { ActionTypes } from "../../enums/ActionTypes";
-import { IOrder } from "../../models/IOrder";
-import { IItem } from "../../models/IItem";
+import { ICartState } from "../../models/ICartState";
 
-
-
-interface CartState{
-    cart:IItem[]
-    orders: IOrder[]
-}
-
-
-export function cartReducer(state:CartState,action:Actions){
+export function cartReducer(state:ICartState,action:Actions){
 
   switch(action.type){
     case ActionTypes.ADD_ITEM:
@@ -62,9 +53,13 @@ export function cartReducer(state:CartState,action:Actions){
           ...action.payload.order,
         }
         draft.orders.push(newOrder)
-        draft.cart = []
+        draft.cart = [];
+
+        console.log('aqui')
 
         action.payload.callback(`/order/${newOrder.id}/success`)
       })
+      default:
+         return state
   }
 }

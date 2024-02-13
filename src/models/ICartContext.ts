@@ -1,6 +1,6 @@
+import { IOrderInfo } from "../pages/Checkout";
 import { IItem } from "./IItem";
 import { IOrder } from "./IOrder";
-import { IOrderInfo } from "./IOrderInfo";
 
 export interface ICartContext{
     cart:IItem[],

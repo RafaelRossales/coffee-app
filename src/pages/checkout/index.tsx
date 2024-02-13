@@ -23,7 +23,7 @@ import { zodResolver } from '@hookform/resolvers/zod'
 import { CurrencyDollar } from "phosphor-react";
 import { Radio } from "../../components/Header/components/Form/Radio";
 import { CreditCard, Trash } from "@phosphor-icons/react/dist/ssr";
-import { coffees } from './../../../data.json'
+import { coffees } from '../../../data.json'
 import { Fragment } from "react";
 import { QuantityInput } from "../Home/components/Body/components/card/form";
 
@@ -51,7 +51,7 @@ const newOrder = z.object({
     })
 })
 
-export type OrderInfo = z.infer<typeof newOrder>
+export type IOrderInfo = z.infer<typeof newOrder>
 
 const shippingPrice = 3.5
 

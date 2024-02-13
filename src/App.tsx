@@ -4,7 +4,8 @@ import { Router } from "./Router";
 import { defaultTheme } from "./styles/theme/default";
 import { GlobalStyle } from './styles/global'
 import { CartContextProvider } from "./context/CartProvider"
-import { Header } from "./components/Header";
+import { Header } from "./components/Header/components/Header";
+
 
 
 function App() {
